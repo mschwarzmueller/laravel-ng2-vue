@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { QuotesService } from "../quotes.service";
+
 import { Quote } from "../quote.interface";
+import { QuoteService } from "../quote.service";
 
 @Component({
   selector: 'app-quote',
@@ -13,26 +14,20 @@ export class QuoteComponent implements OnInit {
   editing = false;
   editValue = '';
 
-  constructor(private quotesService: QuotesService) { }
+  constructor(private quoteService: QuoteService) { }
 
   ngOnInit() {
   }
 
-  onEditQuote() {
+  onEdit() {
     this.editing = true;
     this.editValue = this.quote.content;
   }
 
-  onCancel() {
-    this.editValue = '';
-    this.editing = false;
-  }
-
-  onUpdateQuote() {
-    this.quotesService.updateQuote(this.quote.id, this.editValue)
+  onUpdate() {
+    this.quoteService.updateQuote(this.quote.id, this.editValue)
       .subscribe(
-        () => {
-          console.log('Updated quote!');
+        (quote: Quote) => {
           this.quote.content = this.editValue;
           this.editValue = '';
         }
@@ -40,12 +35,19 @@ export class QuoteComponent implements OnInit {
     this.editing = false;
   }
 
-  onDeleteQuote() {
-    this.quotesService.deleteQuote(this.quote.id)
+  onCancel() {
+    this.editValue = '';
+    this.editing = false;
+  }
+
+  onDelete() {
+    this.quoteService.deleteQuote(this.quote.id)
       .subscribe(
-        () => console.log('Deleted quote!')
+        () => {
+          this.quoteDeleted.emit(this.quote);
+          console.log('Quote deleted');
+        }
       );
-    this.quoteDeleted.emit(this.quote);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { QuotesService } from "../quotes.service";
+import { QuoteService } from "../quote.service";
 
 @Component({
   selector: 'app-new-quote',
@@ -9,19 +9,17 @@ import { QuotesService } from "../quotes.service";
 })
 export class NewQuoteComponent implements OnInit {
 
-  constructor(private quotesService: QuotesService) { }
+  constructor(private quoteService: QuoteService) { }
 
   ngOnInit() {
   }
 
   onSubmit(form: NgForm) {
-    this.quotesService.addQuote(form.value.content)
+    this.quoteService.addQuote(form.value.content)
       .subscribe(
-        () => {
-          console.log('Created quote!');
-          alert('Quote created!');
-        }
+        () => alert('Quote created!')
       );
     form.reset();
   }
+
 }
