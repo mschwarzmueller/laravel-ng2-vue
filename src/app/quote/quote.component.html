@@ -2,15 +2,6 @@
   <div class="panel-body">
     {{ quote.content }}
   </div>
-  <div class="panel-footer">
-    <div *ngIf="editing">
-      <input type="text" [(ngModel)]="editValue">
-      <a href="#" (click)="onUpdate()">Save</a>
-      <a href="#" (click)="onCancel()">Cancel</a>
-    </div>
-    <div *ngIf="!editing">
-      <a href="#" (click)="onEdit()">Edit</a>
-      <a href="#" (click)="onDelete()">Delete</a>
-    </div>
+  <div class="panel-body">
   </div>
 </div>
