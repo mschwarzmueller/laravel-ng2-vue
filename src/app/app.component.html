@@ -1,3 +1,19 @@
-<h1>
-  {{title}}
-</h1>
+<div id="app">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="nav nav-pills">
+          <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['']">Quotes</a></li>
+          <li role="presentation" routerLinkActive="active"><a [routerLink]="['/new-quote']">New Quote</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+

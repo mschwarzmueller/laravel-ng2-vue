@@ -1,0 +1,12 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <div class="form-group">
+    <label for="content">Content</label>
+    <textarea
+      name="content"
+      ngModel
+      id="content"
+      rows="6"
+      class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Save Quote</button>
+</form>
