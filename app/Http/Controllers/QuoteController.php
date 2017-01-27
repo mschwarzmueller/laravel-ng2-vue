@@ -2,23 +2,29 @@
 namespace App\Http\Controllers;
 
 use App\Quote;
+use JWTAuth;
 use Illuminate\Http\Request;
 
 class QuoteController extends Controller
 {
     public function postQuote(Request $request)
     {
+        $user = JWTAuth::parseToken()->toUser();
+        // This code is not needed when using the auth.jwt middleware!
+//        if (!$user = JWTAuth::parseToken()->authenticate()) {
+//            return response()->json(['error' => 'Authentication failed'], 404);
+//        }
         $quote = new Quote();
         $quote->content = $request->input('content');
         $quote->save();
-        return response()->json(['quote' => $quote], 201);
+        return response()->json(['quote' => $quote, 'user' => $user], 201);
     }
 
     public function getQuotes()
     {
         $quotes = Quote::all();
         $response = [
-          'quotes' => $quotes
+            'quotes' => $quotes
         ];
         return response()->json($response, 200);
     }
