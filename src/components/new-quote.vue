@@ -23,7 +23,8 @@
         },
         methods: {
             onSubmitted() {
-                axios.post('http://laravel-ng2-vue.dev/api/quote',
+                const token = localStorage.getItem('token');
+                axios.post('http://laravel-ng2-vue.dev/api/quote?token=' + token,
                     {content: this.quoteContent})
                     .then(
                         (response) => console.log(response)
